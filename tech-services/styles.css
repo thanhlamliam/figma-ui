@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Epilogue:ital,wght@0,100..900;1,100..900&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Epilogue:ital,wght@0,100..900;1,100..900&display=swap');
 
 :root {
   --primary-color: #3171de;
@@ -20,12 +20,12 @@ body {
   background-color: #fff;
 }
 
-ul, ol {
+ul,
+ol {
   list-style: none;
 }
 
-/* ----- Components ----- */
-/* Button */
+/* ----- Other ----- */
 .btn {
   padding: 0 25px;
   min-width: 48px;
@@ -72,6 +72,15 @@ h2.title {
   font-weight: 500;
   line-height: 32px;
   word-wrap: break-word;
+}
+
+.circle-point {
+  position: absolute;
+  top: 0px;
+  left: -79px;
+  width: 32px;
+  height: 32px;
+  border-radius: 999px;
 }
 
 /* ----- Header ----- */
@@ -165,7 +174,311 @@ main {
   right: 0;
 }
 
+/* Since, Yearly */
+.since,
+.yearly,
+.start-up {
+  position: relative;
+  margin-bottom: 200px;
+}
 
+.since .circle-point,
+.yearly .circle-point,
+.start-up .circle-point {
+  background-color: #94C790;
+}
+
+.since .title,
+.since .detail,
+.yearly .title {
+  font-size: 32px;
+  line-height: 32px;
+  font-weight: 600;
+}
+
+.since .title {
+  margin-bottom: 44px;
+}
+
+.since .detail {
+  width: 468px;
+  line-height: 48px;
+}
+
+.yearly .title {
+  margin-bottom: 171px;
+  line-height: 48px;
+}
+
+.yearly .avatar-container {
+  position: relative;
+  height: 300px;
+  width: 1083px;
+  margin: 0 auto;
+}
+
+.yearly .avatar-job {
+  width: fit-content;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 27px;
+}
+
+.yearly .avatar-job p {
+  width: 139px;
+  word-wrap: break-word;
+  font-size: 24px;
+  font-weight: 500;
+  line-height: 32px;
+  text-align: center;
+}
+
+.yearly .avatar-container .avatar-job:nth-child(1) {
+  position: absolute;
+  bottom: 70px;
+  left: 0;
+  z-index: 1;
+}
+
+.yearly .avatar-container .avatar-job:nth-child(2) {
+  position: absolute;
+  bottom: 0;
+  left: 50px;
+  z-index: 2;
+}
+
+.yearly .avatar-container .avatar-job:nth-child(3) {
+  position: absolute;
+  bottom: 0;
+  left: 200px;
+  z-index: 3;
+}
+
+.yearly .avatar-container .avatar-job:nth-child(4) {
+  position: absolute;
+  bottom: 0;
+  left: 350px;
+  z-index: 4;
+}
+
+.yearly .avatar-container .avatar-job:nth-child(5) {
+  position: absolute;
+  bottom: 0;
+  left: 500px;
+  z-index: 5;
+}
+
+.yearly .avatar-container .avatar-job:nth-child(6) {
+  position: absolute;
+  bottom: 0;
+  left: 650px;
+  z-index: 6;
+}
+
+.yearly .avatar-container .avatar-job:nth-child(7) {
+  position: absolute;
+  top: 60px;
+  left: 800px;
+  z-index: 1;
+}
+
+/* Startup */
+.start-up {
+  display: flex;
+  align-items: center;
+  gap: 60px;
+  margin-bottom: 290px;
+}
+
+.start-up .circle-point {
+  transform: translate(0, 255px);
+}
+
+.start-up .title,
+.review-slide .title {
+  width: 452px;
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 32px;
+  word-wrap: break-word;
+}
+
+.start-up .companies {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 55px;
+}
+
+.start-up .companies .comp-container {
+  width: 152px;
+  height: 152px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  box-shadow: 0px 0px 20px 5px rgba(0, 0, 0, 0.07);
+}
+
+/* Kind words */
+.review-slide {
+  position: relative;
+  height: 900px;
+  margin-bottom: 180px;
+}
+
+.review-slide .circle-point {
+  background-color: #81C7C1;
+}
+
+.review-slide .review-container {
+  position: absolute;
+  top: 106px;
+  left: -140px;
+  padding: 79px 0 79px 48px;
+  width: 100vw;
+  z-index: 10;
+}
+
+.review-slide .slide {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+  margin-bottom: 79px;
+  overflow: hidden;
+}
+
+.review-slide .review {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 35px;
+  padding: 35px;
+  min-width: 395px;
+  border: 1px solid #F0F0F6;
+  border-radius: 22px;
+  box-shadow: 0 3px 9px rgba(13, 10, 44, 0.06);
+  background: white;
+  overflow: hidden;
+}
+
+.review-slide .review .title {
+  width: 100%;
+  font-family: "DM Sans", sans-serif;
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 36px;
+  word-wrap: break-word;
+}
+
+.review-slide .review .detail {
+  width: 100%;
+  font-family: "DM Sans", sans-serif;
+  font-size: 18px;
+  line-height: 32px;
+  word-wrap: break-word;
+}
+
+.review-slide .review .divider {
+  width: 100%;
+  border-top: 1px solid #DEDEE9;
+}
+
+.review-slide .review .info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.review-slide .review .info-detail .name {
+  margin-bottom: 3px;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 28px;
+  color: #1E1B39;
+}
+
+.review-slide .control-btns {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+}
+
+.review-slide .control-btns .btn {
+  width: 65px;
+  height: 65px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 100px;
+}
+
+/* How */
+.how {
+  position: relative;
+}
+
+.how .circle-point {
+  background: #7AC7D2;
+}
+
+.how .title {
+  margin-bottom: 30px;
+  font-size: 24px;
+  font-weight: 500;
+  line-height: 32px;
+}
+
+.how .years {
+  display: flex;
+  align-items: stretch;
+  gap: 52px;
+}
+
+.how .years div {
+  flex: 1;
+  padding: 30px;
+  width: 385px;
+  border-radius: 36px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.13);
+}
+
+.how .years .detail {
+  width: 100%;
+  font-size: 16px;
+  line-height: 24px;
+  word-wrap: break-word;
+}
+
+.how .years .year-gradient {
+  margin-bottom: 19px;
+  font-size: 40px;
+  font-weight: 700;
+  line-height: 40px;
+}
+
+.how .years .left .year-gradient {
+  background: linear-gradient(45deg, #3171DE, #704AF2);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.how .years .center .year-gradient {
+  background: linear-gradient(45deg, #62AE6E, #EDE14F);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.how .years .right .year-gradient {
+  background: linear-gradient(45deg, #3171DE, #704AF2);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
 
 /*
 @media (max-width: 768px) {
