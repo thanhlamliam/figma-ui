@@ -1,0 +1,101 @@
+const loop = (data: StepNode[], isTopLevel: boolean = true): StepNode[] =>  // NOSONAR
+        data.map((item) => {
+            const strTitle = item.name as string;
+            const index = strTitle.indexOf(searchValue);
+            const beforeStr = strTitle.substring(0, index);
+            const afterStr = strTitle.slice(index + searchValue.length);
+            // 노드 종류에 따라 아이콘 list 매핑에 사용할 조합을 생성
+            const iconMapStr = (item.nodeType ?? '');
+            const title = () => {
+                const flag: boolean = ['TestScenario', 'TestData'].includes(item.nodeType as string);
+                let contextMenus;
+                if (item.nodeType === 'ExcelData') {
+                    contextMenus = contextMenuList['testData'];
+                } else if (item.nodeType === 'TestData') {
+                    contextMenus = <Menu theme="dark" items={[]}/>
+                } else {
+                    contextMenus = contextMenuList[flag ? 'root':'node'];
+                }
+
+                return (
+                    <Dropdown
+                        overlay={contextMenus}
+                        trigger={['contextMenu']}
+                        onOpenChange={(open) => {
+                            if (!open) setCurrNode(defaultStepNode)
+                        }}>
+                        <div title={strTitle}
+                            className={
+                                (currNodeRef.current.key === item.key ? ' selected-node' : '')
+                                + (errorNode === item.key ? ' error-node' : '')}>
+                            <span className={`txt-node ${!item.enabled ? 'disabled' : ''}`}>
+                                {item.nodeType !== 'ActionField' ?
+                                    (tsIconMap[iconMapStr] ? tsIconMap[iconMapStr] : '') :
+                                    (item.property as ActionField).type === 'ENTER' ? tsIconMap[iconMapStr] :
+                                        <VerticalAlignBottomOutlined style={{ fontSize: '12px', marginRight: 7 }} />
+                                }
+
+                                {(item.key !== editingKeyRef.current) ?
+                                    ((searchValue !== '' && index > -1) ? (
+                                        <>
+                                            <span>{beforeStr}</span>
+                                            <div style={{ color: "#BF5AF2", fontWeight: "600" }}>{searchValue}</div>
+                                            <div className="txt-value">{afterStr}</div>
+                                        </>
+                                    ) : (
+                                        <span className="txt-ellipsis">{strTitle}</span>
+                                    ))
+                                    :
+                                    <InlineInput
+                                        currNode={item}
+                                        editingKeyValue={editingKeyValueRef.current}
+                                        updateEditKeyValue={updateEditKeyValue}
+                                        setEditingKeyValue={setEditingKeyValue}
+                                    />
+                                }
+                            </span>
+                            {item.nodeType !== 'TestData' &&
+                                <Dropdown overlay={contextMenus} trigger={['click']}
+                                    onOpenChange={(open) => {
+                                        if (!open) setCurrNode(defaultStepNode)
+                                    }}>
+                                        <EllipsisOutlined className="tree-click-icon"
+                                                    onClick={(e) => {
+                                                        e.stopPropagation();
+                                                        // setSelectedKeys([item.key]);
+                                                        setCurrNode({...item});
+                                                    }}/>
+                                </Dropdown>
+                            }
+                            {item.nodeType === 'TestData' &&
+                                <Flex className="tree-btn-right">
+                                    <Tooltip title={"tooltip"}>
+                                        <IconInfo16 />
+                                    </Tooltip>
+                                    <Button type='primary' size='small'
+                                        onClick={onLoadDataButtonClick}>{t('ptee.label.testScenario.loadData')}</Button>
+                                </Flex>
+                            }
+                            {item.nodeType === 'TestScenario' &&
+                                <Flex className="tree-btn-right">
+                                    <Tooltip title={"tooltip"}>
+                                        <IconInfo16 />
+                                    </Tooltip>
+                                    <Button type='primary' size='small'
+                                        onClick={(e) => onRecordButtonClick(e)}
+                                        disabled={recordState > RecordState.NO_STATE}>
+                                        {t('pt4sap.label.record.recording')}
+                                    </Button>
+                                </Flex>
+                            }
+                        </div>
+                    </Dropdown>
+                );
+            };
+            if (item.children) {
+                return isTopLevel ?
+                    { ...item, 'title': title, children: loop(item.children, false), className: "top-level-node" } :
+                    { ...item, 'title': title, children: loop(item.children, false) }
+            }
+            return { ...item, 'title': title };
+        });
